@@ -1,12 +1,13 @@
 type StringArray = string[];
 type ElementType = StringArray[number];//indexed-access-types
 
-type ElementTypeGeneric<T extends any[]> = T[number];
+type ElementTypeGeneric<T extends any[]> = T[number];//generic types, 
 type Example1 = ElementTypeGeneric<StringArray>;
 
 let text ="Hello";
-//type example2 = ElementTypeGeneric<typeof text>;//let text2 = 'hello';
-//type example3 = ElementTypeGeneric<typeof text2>; // error
+type example2 = ElementTypeGeneric<typeof text>;////error //string is not an array
+let text2 = 'hello';
+type example3 = ElementTypeGeneric<typeof text2>; // error //error string is not an array
 
 
 //to resolve above problem we can use conditional types
@@ -27,6 +28,12 @@ function getFullName<T extends object>(obj:T): FullNameOrNothing<T>{
         return `${obj['firstName']} ${obj['lastName']}` as FullNameOrNothing<T>;
     }
 
+    throw new Error("firstName or lastName not found");
+}
+function getFullName2<T extends object>(obj:T): T extends FullNamePerson ? string : never{
+    if(obj['firstName'] && obj['lastName']){
+        return `${obj['firstName']} ${obj['lastName']}` as T extends FullNamePerson ? string : never;
+    }
     throw new Error("firstName or lastName not found");
 }
 
