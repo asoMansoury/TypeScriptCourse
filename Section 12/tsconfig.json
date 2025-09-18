@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "target": "ES2020",
+    "module": "ES2020",                // <— change from nodenext
+    "moduleResolution": "bundler",     // or "node"
+    "sourceMap": true,
+    "strict": true,
+    "skipLibCheck": true
+  }
+}
